@@ -7,7 +7,7 @@ class Sketch : NSObject {
     let canvas : Canvas
     
     // Position of circle
-    var x : Int
+    var offset : Int
     
     // This function runs once
     override init() {
@@ -16,7 +16,7 @@ class Sketch : NSObject {
         canvas = Canvas(width: 500, height: 500)
         
         // Set starting position
-        x = 250
+        offset = 250
         
     }
     
@@ -24,10 +24,25 @@ class Sketch : NSObject {
     func draw() {
         
         // Change position
-        x += 1
+        offset += 1
         
         // Draw an ellipse in the middle of the canvas
-        canvas.drawEllipse(centreX: x, centreY: 250, width: 50, height: 50)
+        //the four ellipses must be drawn starting with the one going to the top right corner
+        canvas.drawShapesWithBorders = false
+        canvas.fillColor = Color.red
+        canvas.drawEllipse(centreX: offset, centreY: offset, width: 50, height: 50)
+        
+        //bottom right
+         canvas.fillColor = Color.blue
+        canvas.drawEllipse(centreX: offset, centreY: 500 - offset, width: 50, height: 50)
+        
+        //top left
+         canvas.fillColor = Color.green
+        canvas.drawEllipse(centreX: 500 - offset, centreY: offset, width: 50, height: 50)
+        
+        //bottom left
+         canvas.fillColor = Color.yellow
+        canvas.drawEllipse(centreX: 500 - offset, centreY: 500 - offset, width: 50, height: 50)
         
     }
     
